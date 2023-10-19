@@ -1,4 +1,5 @@
 from numbers import Number
+from typing import Any
 
 
 class Polynomial:
@@ -68,3 +69,29 @@ class Polynomial:
         Poly = self - other
         Poly.coefficients = tuple(-r for r in Poly.coefficients)
         return Poly
+    
+    def __mul__(self, other):
+        Poly = 0
+        if isinstance(other, Number):
+            return Polynomial(tuple(other*i for i in self.coefficients))
+        elif isinstance(self,Polynomial):
+            for i in range(0,len(other.coefficients)):
+                tuple1 = (0,)*i
+                Poly += Polynomial(tuple1 + tuple(other.coefficients[i]* r for r in self.coefficients))
+            return Poly
+    def __rmul__(self, other):
+        return self * other 
+
+    def __pow__(self, Number):
+        self2 = self
+        for i in range(0,Number-1):
+            self1 = self2
+            self2 = self * self1
+        return self2 
+
+    def __call__(self, x):
+        val = 0
+        for i in range(0, len(self.coefficients)):
+            val = val + x**(i) * self.coefficients[i] 
+        return val
+                    
