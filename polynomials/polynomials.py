@@ -101,3 +101,6 @@ class Polynomial:
         else :
             coefs = tuple((i)*self.coefficients[i] for i in range(1,len(self.coefficients)))
             return Polynomial(coefs)
+
+def derivative(Polynomial):
+    return Polynomial.dx()
