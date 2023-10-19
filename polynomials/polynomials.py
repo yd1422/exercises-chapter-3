@@ -94,4 +94,10 @@ class Polynomial:
         for i in range(0, len(self.coefficients)):
             val = val + x**(i) * self.coefficients[i] 
         return val
-                    
+
+    def dx(self):
+        if len(self.coefficients) == 1:
+            return Polynomial((0, ))
+        else :
+            coefs = tuple((i)*self.coefficients[i] for i in range(1,len(self.coefficients)))
+            return Polynomial(coefs)
